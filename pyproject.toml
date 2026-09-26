@@ -1,0 +1,25 @@
+[project]
+name = "llm-cost-autopilot"
+version = "0.1.0"
+description = "Route each LLM request to the cheapest model likely to get it right, measured on HELM's recorded answers"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["numpy==2.4.6", "scikit-learn==1.9.1", "onnxruntime==1.30.0", "tokenizers==0.23.2", "pyyaml>=6",
+                "fastapi==0.141.1", "httpx==0.28.1", "uvicorn==0.54.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["autopilot"]
+
+[tool.setuptools.package-data]
+autopilot = ["models.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

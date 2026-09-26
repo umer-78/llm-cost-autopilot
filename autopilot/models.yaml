@@ -1,0 +1,57 @@
+# The model registry. Prices are each provider's published list price per million tokens,
+# as of early 2025 (Llama through Together AI's "Turbo" endpoints). Check them before you
+# rely on the dollar figures: routing decisions only depend on their ratios.
+#
+# helm / release: where this model's measured answers live in HELM Lite's public results.
+models:
+  gpt-4o:
+    provider: openai
+    model_id: gpt-4o-2024-08-06
+    input_per_million: 2.50
+    output_per_million: 10.00
+    tier: high
+    helm: openai_gpt-4o-2024-08-06
+    release: v1.10.0
+  deepseek-v3:
+    provider: deepseek
+    model_id: deepseek-chat
+    input_per_million: 0.27
+    output_per_million: 1.10
+    tier: high
+    helm: deepseek-ai_deepseek-v3
+    release: v1.13.0
+  llama-3.1-70b:
+    provider: together
+    model_id: meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo
+    input_per_million: 0.88
+    output_per_million: 0.88
+    tier: medium
+    helm: meta_llama-3.1-70b-instruct-turbo
+    release: v1.7.0
+  gpt-4o-mini:
+    provider: openai
+    model_id: gpt-4o-mini-2024-07-18
+    input_per_million: 0.15
+    output_per_million: 0.60
+    tier: medium
+    helm: openai_gpt-4o-mini-2024-07-18
+    release: v1.6.0
+  gemini-1.5-flash:
+    provider: google
+    model_id: gemini-1.5-flash-002
+    input_per_million: 0.075
+    output_per_million: 0.30
+    tier: low
+    helm: google_gemini-1.5-flash-002
+    release: v1.10.0
+  llama-3.1-8b:
+    provider: together
+    model_id: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+    input_per_million: 0.18
+    output_per_million: 0.18
+    tier: low
+    helm: meta_llama-3.1-8b-instruct-turbo
+    release: v1.7.0
+
+# The model every request goes to today, and the one the router has to match.
+frontier: gpt-4o
