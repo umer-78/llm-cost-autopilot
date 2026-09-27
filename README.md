@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/umer-78/llm-cost-autopilot/actions/workflows/ci.yml/badge.svg)](https://github.com/umer-78/llm-cost-autopilot/actions/workflows/ci.yml)
 
+[![LLM Cost Autopilot: the live demo](.github/preview.jpg)](https://umer-78.github.io/llm-cost-autopilot/)
+
 **Live demo:** https://umer-78.github.io/llm-cost-autopilot/ (every strategy's cost and accuracy, and the router's confidence as a slider)
 
 A router that sends each LLM request to the cheapest model likely to get it right. Measured on
