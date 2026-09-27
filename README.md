@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/umer-78/llm-cost-autopilot/actions/workflows/ci.yml/badge.svg)](https://github.com/umer-78/llm-cost-autopilot/actions/workflows/ci.yml)
 
+**Live demo:** https://umer-78.github.io/llm-cost-autopilot/ (every strategy's cost and accuracy, and the router's confidence as a slider)
+
 A router that sends each LLM request to the cheapest model likely to get it right. Measured on
 4,551 questions whose answers from every model were recorded by
 [HELM Lite](https://crfm.stanford.edu/helm/lite/) (GSM8K, MATH, MMLU, MedQA, OpenBookQA,
 LegalBench), it **matched GPT-4o's accuracy at 23% of the cost** with US-hosted models, and at
 **10.5% of the cost** when DeepSeek-V3 is allowed.
-
-**Live demo:** https://umer-78.github.io/llm-cost-autopilot/ (every strategy's cost and accuracy, and the router's confidence as a slider)
 
 | Strategy (US providers) | Accuracy | $ per 1,000 requests | Saving |
 |---|---|---|---|

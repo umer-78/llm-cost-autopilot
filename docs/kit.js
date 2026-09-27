@@ -61,9 +61,9 @@ export function bars(el, rows, opts = {}) {
 }
 
 export function table(el, cols, rows, opts = {}) {
-  // cols: [{key, label, num?, fmt?, html?}]; rows: objects; opts.hl(row) -> highlight
+  // cols: [{key, label, num?, fmt?, html?}]; rows: objects; opts.hl(row) -> highlight; opts.cls(row) -> a row class
   const head = cols.map((c) => `<th${c.num ? ' class="num"' : ''}>${esc(c.label)}</th>`).join('');
-  const body = rows.map((r) => `<tr${opts.hl && opts.hl(r) ? ' class="hl"' : ''}>` + cols.map((c) => {
+  const body = rows.map((r) => `<tr class="${opts.hl && opts.hl(r) ? 'hl' : ''} ${(opts.cls && opts.cls(r)) || ''}">` + cols.map((c) => {
     const v = c.fmt ? c.fmt(r[c.key], r) : r[c.key];
     return `<td${c.num ? ' class="num"' : ''}>${c.html ? v : esc(v ?? '')}</td>`;
   }).join('') + '</tr>').join('');
@@ -170,4 +170,18 @@ export function xy(el, spec) {
 export function legend(el, series) {
   el.classList.add('legend');
   el.innerHTML = series.map((s, i) => `<span style="--c:${s.color || `var(--c${(i % 6) + 1})`}">${esc(s.name)}</span>`).join('');
+}
+
+// Signed bars around a centre line: rows [{label, value, text?, color?}], scaled to opts.max (default: the largest |value|).
+export function diverge(el, rows, opts = {}) {
+  const max = opts.max ?? Math.max(...rows.map((r) => Math.abs(r.value)), 1e-9);
+  const fmt = opts.fmt || ((v) => String(v));
+  el.classList.add('bars');
+  el.innerHTML = rows.map((r) => {
+    const w = Math.min(50, (50 * Math.abs(r.value)) / max);
+    const c = r.color || (r.value < 0 ? 'var(--bad)' : 'var(--good)');
+    return `<div class="bar" title="${esc(r.title || r.label)}"><span class="name">${esc(r.label)}</span>` +
+      `<span class="track dv"><span class="fill" style="position:absolute;top:0;bottom:0;left:${r.value < 0 ? 50 - w : 50}%;width:${w.toFixed(2)}%;--c:${c}"></span></span>` +
+      `<span class="val">${esc(r.text ?? fmt(r.value))}</span></div>`;
+  }).join('');
 }
