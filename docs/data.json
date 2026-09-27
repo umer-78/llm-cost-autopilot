@@ -1,0 +1,570 @@
+{
+ "questions": 4551,
+ "tasks": {
+  "gsm8k": 1000,
+  "legalbench": 2047,
+  "math": 437,
+  "mmlu": 567,
+  "openbookqa": 500
+ },
+ "prices": {
+  "gpt-4o": {
+   "input": 2.5,
+   "output": 10.0
+  },
+  "deepseek-v3": {
+   "input": 0.27,
+   "output": 1.1
+  },
+  "llama-3.1-70b": {
+   "input": 0.88,
+   "output": 0.88
+  },
+  "gpt-4o-mini": {
+   "input": 0.15,
+   "output": 0.6
+  },
+  "gemini-1.5-flash": {
+   "input": 0.075,
+   "output": 0.3
+  },
+  "llama-3.1-8b": {
+   "input": 0.18,
+   "output": 0.18
+  }
+ },
+ "registries": {
+  "US providers": {
+   "models": [
+    "gemini-1.5-flash",
+    "llama-3.1-8b",
+    "gpt-4o-mini",
+    "llama-3.1-70b",
+    "gpt-4o"
+   ],
+   "frontier": "gpt-4o",
+   "test_questions": 2197,
+   "single": {
+    "gemini-1.5-flash": {
+     "accuracy": 0.6377,
+     "per_1000": 0.098
+    },
+    "llama-3.1-8b": {
+     "accuracy": 0.5002,
+     "per_1000": 0.233
+    },
+    "gpt-4o-mini": {
+     "accuracy": 0.7142,
+     "per_1000": 0.226
+    },
+    "llama-3.1-70b": {
+     "accuracy": 0.7401,
+     "per_1000": 1.129
+    },
+    "gpt-4o": {
+     "accuracy": 0.7756,
+     "per_1000": 3.638
+    }
+   },
+   "oracle": {
+    "accuracy": 0.8871,
+    "per_1000": 0.436
+   },
+   "task_map": {
+    "map": {
+     "gsm8k": "llama-3.1-70b",
+     "legalbench": "gpt-4o",
+     "math": "gemini-1.5-flash",
+     "mmlu": "gpt-4o",
+     "openbookqa": "gpt-4o"
+    },
+    "accuracy": 0.7852,
+    "per_1000": 2.478
+   },
+   "router": {
+    "confidence": 0.82,
+    "accuracy": 0.7783,
+    "per_1000": 0.827,
+    "saving": 0.7727,
+    "vs_frontier_ci": [
+     -0.0096,
+     0.0159
+    ],
+    "share": {
+     "gemini-1.5-flash": 0.3705,
+     "llama-3.1-8b": 0.0701,
+     "gpt-4o-mini": 0.173,
+     "llama-3.1-70b": 0.1365,
+     "gpt-4o": 0.2499
+    },
+    "by_task": {
+     "gsm8k": {
+      "router": 0.8619,
+      "frontier": 0.9031,
+      "per_1000": 0.369,
+      "frontier_per_1000": 4.084
+     },
+     "legalbench": {
+      "router": 0.6856,
+      "frontier": 0.6557,
+      "per_1000": 1.416,
+      "frontier_per_1000": 4.475
+     },
+     "math": {
+      "router": 0.9242,
+      "frontier": 0.8863,
+      "per_1000": 0.095,
+      "frontier_per_1000": 4.988
+     },
+     "mmlu": {
+      "router": 0.7323,
+      "frontier": 0.7472,
+      "per_1000": 0.708,
+      "frontier_per_1000": 1.192
+     },
+     "openbookqa": {
+      "router": 0.9295,
+      "frontier": 0.9648,
+      "per_1000": 0.019,
+      "frontier_per_1000": 0.623
+     }
+    },
+    "curve": [
+     {
+      "confidence": 0.4,
+      "accuracy": 0.731,
+      "per_1000": 0.127
+     },
+     {
+      "confidence": 0.42,
+      "accuracy": 0.7355,
+      "per_1000": 0.132
+     },
+     {
+      "confidence": 0.44,
+      "accuracy": 0.7378,
+      "per_1000": 0.141
+     },
+     {
+      "confidence": 0.46,
+      "accuracy": 0.7419,
+      "per_1000": 0.15
+     },
+     {
+      "confidence": 0.48,
+      "accuracy": 0.7424,
+      "per_1000": 0.162
+     },
+     {
+      "confidence": 0.5,
+      "accuracy": 0.7447,
+      "per_1000": 0.173
+     },
+     {
+      "confidence": 0.52,
+      "accuracy": 0.7447,
+      "per_1000": 0.189
+     },
+     {
+      "confidence": 0.54,
+      "accuracy": 0.751,
+      "per_1000": 0.206
+     },
+     {
+      "confidence": 0.56,
+      "accuracy": 0.7519,
+      "per_1000": 0.221
+     },
+     {
+      "confidence": 0.58,
+      "accuracy": 0.7556,
+      "per_1000": 0.237
+     },
+     {
+      "confidence": 0.6,
+      "accuracy": 0.7556,
+      "per_1000": 0.257
+     },
+     {
+      "confidence": 0.62,
+      "accuracy": 0.7579,
+      "per_1000": 0.269
+     },
+     {
+      "confidence": 0.64,
+      "accuracy": 0.7601,
+      "per_1000": 0.282
+     },
+     {
+      "confidence": 0.66,
+      "accuracy": 0.7619,
+      "per_1000": 0.295
+     },
+     {
+      "confidence": 0.68,
+      "accuracy": 0.7665,
+      "per_1000": 0.315
+     },
+     {
+      "confidence": 0.7,
+      "accuracy": 0.7683,
+      "per_1000": 0.342
+     },
+     {
+      "confidence": 0.72,
+      "accuracy": 0.7674,
+      "per_1000": 0.379
+     },
+     {
+      "confidence": 0.74,
+      "accuracy": 0.7706,
+      "per_1000": 0.413
+     },
+     {
+      "confidence": 0.76,
+      "accuracy": 0.7761,
+      "per_1000": 0.476
+     },
+     {
+      "confidence": 0.78,
+      "accuracy": 0.7765,
+      "per_1000": 0.543
+     },
+     {
+      "confidence": 0.8,
+      "accuracy": 0.7761,
+      "per_1000": 0.703
+     },
+     {
+      "confidence": 0.82,
+      "accuracy": 0.7783,
+      "per_1000": 0.827
+     },
+     {
+      "confidence": 0.84,
+      "accuracy": 0.7811,
+      "per_1000": 0.994
+     },
+     {
+      "confidence": 0.86,
+      "accuracy": 0.7843,
+      "per_1000": 1.146
+     },
+     {
+      "confidence": 0.88,
+      "accuracy": 0.787,
+      "per_1000": 1.238
+     },
+     {
+      "confidence": 0.9,
+      "accuracy": 0.7929,
+      "per_1000": 1.319
+     },
+     {
+      "confidence": 0.92,
+      "accuracy": 0.7943,
+      "per_1000": 1.388
+     },
+     {
+      "confidence": 0.94,
+      "accuracy": 0.7924,
+      "per_1000": 1.439
+     },
+     {
+      "confidence": 0.96,
+      "accuracy": 0.7956,
+      "per_1000": 1.481
+     },
+     {
+      "confidence": 0.98,
+      "accuracy": 0.7975,
+      "per_1000": 1.504
+     }
+    ],
+    "agrees_with_frontier": 0.8867
+   },
+   "cascade": {
+    "pair": [
+     "gemini-1.5-flash",
+     "llama-3.1-70b"
+    ],
+    "accuracy": 0.7765,
+    "per_1000": 2.332,
+    "escalated": 0.3382,
+    "vs_frontier_ci": [
+     -0.0082,
+     0.0105
+    ]
+   }
+  },
+  "any provider": {
+   "models": [
+    "gemini-1.5-flash",
+    "llama-3.1-8b",
+    "gpt-4o-mini",
+    "deepseek-v3",
+    "llama-3.1-70b",
+    "gpt-4o"
+   ],
+   "frontier": "gpt-4o",
+   "test_questions": 2197,
+   "single": {
+    "gemini-1.5-flash": {
+     "accuracy": 0.6377,
+     "per_1000": 0.098
+    },
+    "llama-3.1-8b": {
+     "accuracy": 0.5002,
+     "per_1000": 0.233
+    },
+    "gpt-4o-mini": {
+     "accuracy": 0.7142,
+     "per_1000": 0.226
+    },
+    "deepseek-v3": {
+     "accuracy": 0.7861,
+     "per_1000": 0.33
+    },
+    "llama-3.1-70b": {
+     "accuracy": 0.7401,
+     "per_1000": 1.129
+    },
+    "gpt-4o": {
+     "accuracy": 0.7756,
+     "per_1000": 3.638
+    }
+   },
+   "oracle": {
+    "accuracy": 0.899,
+    "per_1000": 0.379
+   },
+   "task_map": {
+    "map": {
+     "gsm8k": "deepseek-v3",
+     "legalbench": "gpt-4o",
+     "math": "gemini-1.5-flash",
+     "mmlu": "deepseek-v3",
+     "openbookqa": "gpt-4o"
+    },
+    "accuracy": 0.7915,
+    "per_1000": 2.193
+   },
+   "router": {
+    "confidence": 0.78,
+    "accuracy": 0.7829,
+    "per_1000": 0.382,
+    "saving": 0.895,
+    "vs_frontier_ci": [
+     -0.0068,
+     0.0209
+    ],
+    "share": {
+     "gemini-1.5-flash": 0.3741,
+     "llama-3.1-8b": 0.1252,
+     "gpt-4o-mini": 0.1338,
+     "deepseek-v3": 0.1848,
+     "llama-3.1-70b": 0.0273,
+     "gpt-4o": 0.1548
+    },
+    "by_task": {
+     "gsm8k": {
+      "router": 0.8495,
+      "frontier": 0.9031,
+      "per_1000": 0.234,
+      "frontier_per_1000": 4.084
+     },
+     "legalbench": {
+      "router": 0.6876,
+      "frontier": 0.6557,
+      "per_1000": 0.662,
+      "frontier_per_1000": 4.475
+     },
+     "math": {
+      "router": 0.9242,
+      "frontier": 0.8863,
+      "per_1000": 0.095,
+      "frontier_per_1000": 4.988
+     },
+     "mmlu": {
+      "router": 0.7807,
+      "frontier": 0.7472,
+      "per_1000": 0.13,
+      "frontier_per_1000": 1.192
+     },
+     "openbookqa": {
+      "router": 0.9339,
+      "frontier": 0.9648,
+      "per_1000": 0.019,
+      "frontier_per_1000": 0.623
+     }
+    },
+    "curve": [
+     {
+      "confidence": 0.4,
+      "accuracy": 0.7292,
+      "per_1000": 0.124
+     },
+     {
+      "confidence": 0.42,
+      "accuracy": 0.7351,
+      "per_1000": 0.129
+     },
+     {
+      "confidence": 0.44,
+      "accuracy": 0.7378,
+      "per_1000": 0.134
+     },
+     {
+      "confidence": 0.46,
+      "accuracy": 0.7406,
+      "per_1000": 0.14
+     },
+     {
+      "confidence": 0.48,
+      "accuracy": 0.7424,
+      "per_1000": 0.149
+     },
+     {
+      "confidence": 0.5,
+      "accuracy": 0.7442,
+      "per_1000": 0.159
+     },
+     {
+      "confidence": 0.52,
+      "accuracy": 0.746,
+      "per_1000": 0.171
+     },
+     {
+      "confidence": 0.54,
+      "accuracy": 0.7506,
+      "per_1000": 0.183
+     },
+     {
+      "confidence": 0.56,
+      "accuracy": 0.7515,
+      "per_1000": 0.195
+     },
+     {
+      "confidence": 0.58,
+      "accuracy": 0.7556,
+      "per_1000": 0.204
+     },
+     {
+      "confidence": 0.6,
+      "accuracy": 0.756,
+      "per_1000": 0.213
+     },
+     {
+      "confidence": 0.62,
+      "accuracy": 0.756,
+      "per_1000": 0.221
+     },
+     {
+      "confidence": 0.64,
+      "accuracy": 0.7601,
+      "per_1000": 0.228
+     },
+     {
+      "confidence": 0.66,
+      "accuracy": 0.7624,
+      "per_1000": 0.235
+     },
+     {
+      "confidence": 0.68,
+      "accuracy": 0.7692,
+      "per_1000": 0.245
+     },
+     {
+      "confidence": 0.7,
+      "accuracy": 0.7724,
+      "per_1000": 0.261
+     },
+     {
+      "confidence": 0.72,
+      "accuracy": 0.7729,
+      "per_1000": 0.28
+     },
+     {
+      "confidence": 0.74,
+      "accuracy": 0.7756,
+      "per_1000": 0.306
+     },
+     {
+      "confidence": 0.76,
+      "accuracy": 0.7811,
+      "per_1000": 0.341
+     },
+     {
+      "confidence": 0.78,
+      "accuracy": 0.7829,
+      "per_1000": 0.382
+     },
+     {
+      "confidence": 0.8,
+      "accuracy": 0.7815,
+      "per_1000": 0.469
+     },
+     {
+      "confidence": 0.82,
+      "accuracy": 0.7833,
+      "per_1000": 0.552
+     },
+     {
+      "confidence": 0.84,
+      "accuracy": 0.787,
+      "per_1000": 0.743
+     },
+     {
+      "confidence": 0.86,
+      "accuracy": 0.7897,
+      "per_1000": 0.889
+     },
+     {
+      "confidence": 0.88,
+      "accuracy": 0.7929,
+      "per_1000": 0.967
+     },
+     {
+      "confidence": 0.9,
+      "accuracy": 0.7988,
+      "per_1000": 1.021
+     },
+     {
+      "confidence": 0.92,
+      "accuracy": 0.7993,
+      "per_1000": 1.041
+     },
+     {
+      "confidence": 0.94,
+      "accuracy": 0.8015,
+      "per_1000": 1.08
+     },
+     {
+      "confidence": 0.96,
+      "accuracy": 0.8029,
+      "per_1000": 1.141
+     },
+     {
+      "confidence": 0.98,
+      "accuracy": 0.8038,
+      "per_1000": 1.183
+     }
+    ],
+    "agrees_with_frontier": 0.8653
+   },
+   "cascade": {
+    "pair": [
+     "gpt-4o-mini",
+     "deepseek-v3"
+    ],
+    "accuracy": 0.7765,
+    "per_1000": 1.102,
+    "escalated": 0.1884,
+    "vs_frontier_ci": [
+     -0.0077,
+     0.01
+    ]
+   }
+  }
+ }
+}

@@ -8,6 +8,8 @@ A router that sends each LLM request to the cheapest model likely to get it righ
 LegalBench), it **matched GPT-4o's accuracy at 23% of the cost** with US-hosted models, and at
 **10.5% of the cost** when DeepSeek-V3 is allowed.
 
+**Live demo:** https://umer-78.github.io/llm-cost-autopilot/ (every strategy's cost and accuracy, and the router's confidence as a slider)
+
 | Strategy (US providers) | Accuracy | $ per 1,000 requests | Saving |
 |---|---|---|---|
 | everything to GPT-4o | 77.6% | 3.64 | - |
@@ -41,6 +43,7 @@ task: Gemini 1.5 Flash gets 93% of MATH level 1 but 33% of GSM8K, and the router
 pip install -e '.[dev]'
 pytest -q                  # 4 tests
 python -m autopilot bench  # downloads HELM results (~65 MB) and prints the tables
+python -m autopilot.demo   # rebuild the live demo's data in docs/
 python -m autopilot gate   # CI: router within a point of GPT-4o, saving within 5 points of baseline
 ```
 

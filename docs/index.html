@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Cost Autopilot · Umer Hashmi</title>
+  <meta name="description" content="A router that sends each prompt to the cheapest model likely to get it right, measured on 2,197 held-out HELM questions.">
+  <link rel="stylesheet" href="kit.css">
+  <style>:root { --accent: #0f766e; --on-accent: #fff; } @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent: #2dd4bf; --on-accent: #0f0e0c; } }</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="crumb" href="https://umer-78.github.io/">← All projects</a>
+      <h1>LLM Cost Autopilot</h1>
+      <p class="lede">Most prompts don't need the most expensive model. This router predicts, for every model, the chance it answers a prompt correctly and picks the cheapest one that is likely enough to. Everything below is measured on 2,197 held-out questions from HELM Lite, with each provider's list prices applied to HELM's real token counts.</p>
+      <div class="links"><a class="btn primary" href="#confidence">Set the router&#x27;s confidence</a><a class="btn" href="https://github.com/umer-78/llm-cost-autopilot">Code and method</a></div>
+    </header>
+    <main>
+      <section class="kpis" id="kpis"></section>
+      <section class="card">
+        <h2>Cost against accuracy</h2>
+        <p class="sub">Each dot is a strategy run on the same held-out questions (GSM8K, LegalBench, MATH, MMLU, OpenBookQA). The line is the learned router at every confidence setting. The oracle knows in hindsight which cheap model was right: a ceiling, not a strategy. Tap a dot for its numbers.</p>
+        <div class="controls"><label>Models allowed</label><div id="reg"></div></div>
+        <div id="scatter"></div>
+        <div id="scatterKey"></div>
+        <div class="readout" id="pick"></div>
+      </section>
+      <section class="card" id="confidence">
+        <h2>Set the router's confidence</h2>
+        <p class="sub">The router sends a prompt to the cheapest model whose predicted chance of being right clears this confidence (and to the model it trusts most when none does). Higher is safer and dearer. The marked setting is the one chosen on the training half: the lowest that matched gpt-4o's accuracy there.</p>
+        <div class="controls"><label for="conf">Confidence</label><input id="conf" type="range" min="0" max="29" step="1"><b id="confVal" class="mono"></b></div>
+        <div class="controls"><label>Requests a month</label><div id="vol"></div></div>
+        <div class="readout" id="confOut"></div>
+      </section>
+      <div class="grid2">
+        <section class="card"><h2>Where the router sends traffic</h2><p class="sub" id="shareSub"></p><div id="share"></div></section>
+        <section class="card"><h2>By task</h2><p class="sub">The router at its chosen confidence against sending everything to gpt-4o.</p><div id="tasks"></div></section>
+      </div>
+    </main>
+    <footer>Built by <a href="https://github.com/umer-78">Umer Hashmi</a> · Per-question results from <a href="https://crfm.stanford.edu/helm/lite/">HELM Lite</a> (Stanford CRFM), downloaded at run time; this page shows only aggregate numbers · Prices: providers' list prices, early 2025</footer>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
