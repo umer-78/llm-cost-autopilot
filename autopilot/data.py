@@ -11,7 +11,7 @@ import hashlib
 import json
 import os
 import re
-import tarfile
+import time
 import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -23,9 +23,16 @@ import yaml
 BUCKET = "https://storage.googleapis.com/crfm-helm-public"
 LISTING = "https://storage.googleapis.com/storage/v1/b/crfm-helm-public/o"
 REGISTRY = Path(__file__).with_name("models.yaml")
-MODELS = {   # the sentence embedder for the router's features: (url, sha256, folder, onnx file, pooling)
-    "bge-small": ("https://storage.googleapis.com/qdrant-fastembed/fast-bge-small-en-v1.5.tar.gz",
-                  "3858004b3822f64f940280874b8f2d2dc25b34a4f3eb3cdf617bdceeb21ed9ed", "fast-bge-small-en-v1.5", "model_optimized.onnx", "cls"),
+# The sentence embedder for the router's features: bge-small-en-v1.5 (BAAI, MIT) as the ONNX
+# export the fastembed library uses, from Qdrant's Hugging Face repository at a pinned commit.
+# Each file is checked against its SHA-256. (It used to come as a tarball from Qdrant's storage
+# bucket, which no longer allows downloads.)
+HF_FILE = "https://huggingface.co/{repo}/resolve/{rev}/{name}"
+MODELS = {   # name: (where its files come from, onnx file, pooling)
+    "bge-small": ({"repo": "Qdrant/bge-small-en-v1.5-onnx-Q", "rev": "aa8f8b060edb00e03bfdd08813a2949946c8ba55",
+                   "folder": "fast-bge-small-en-v1.5",
+                   "files": {"tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+                             "model_optimized.onnx": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431"}}, "model_optimized.onnx", "cls"),
 }
 TASKS = {   # HELM scenario -> (task name, the metric that says right or wrong)
     "gsm": ("gsm8k", "final_number_exact_match"),
@@ -134,17 +141,27 @@ def table():
 
 
 def model_dir(name) -> Path:
-    url, sha, folder, _, _ = MODELS[name]
-    target = cache_dir() / folder
-    if not (target / "tokenizer.json").exists():
-        archive = cache_dir() / f"{folder}.tar.gz"
-        if not archive.exists() or hashlib.sha256(archive.read_bytes()).hexdigest() != sha:
-            with urllib.request.urlopen(url, timeout=300) as r:
-                body = r.read()
-            if hashlib.sha256(body).hexdigest() != sha:
-                raise RuntimeError(f"{name}: the download does not match its pinned sha256")
-            archive.write_bytes(body)
-        with tarfile.open(archive) as tar:
-            members = [m for m in tar.getmembers() if not Path(m.name).name.startswith("._")]
-            tar.extractall(cache_dir(), members=members, filter="data")
+    return model_files(MODELS[name][0])
+
+def model_files(spec, tries=4):
+    """The model's files in the cache, downloading any that are missing or do not match their SHA-256."""
+    target = cache_dir() / spec["folder"]
+    target.mkdir(parents=True, exist_ok=True)
+    for name, sha in spec["files"].items():
+        path = target / name
+        if path.exists() and hashlib.sha256(path.read_bytes()).hexdigest() == sha:
+            continue
+        url = HF_FILE.format(repo=spec["repo"], rev=spec["rev"], name=name)
+        for attempt in range(tries):
+            try:
+                with urllib.request.urlopen(url, timeout=300) as r:
+                    body = r.read()
+                break
+            except OSError:
+                if attempt == tries - 1:
+                    raise
+                time.sleep(2 ** attempt)
+        if hashlib.sha256(body).hexdigest() != sha:
+            raise RuntimeError(f"{spec['repo']}/{name}: the download does not match its pinned SHA-256")
+        path.write_bytes(body)
     return target
