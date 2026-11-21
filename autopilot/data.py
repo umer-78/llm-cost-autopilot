@@ -123,7 +123,7 @@ def table():
     jobs = [(name, cfg["release"], run) for name, cfg in reg.items() for run in runs_for(cfg["helm"], cfg["release"])]
     with ThreadPoolExecutor(8) as pool:
         loaded = list(pool.map(lambda job: (job, download(job[1], job[2])), jobs))
-    for (name, release, run), (predictions, instances) in loaded:
+    for (name, _release, run), (predictions, instances) in loaded:
         scenario = run.split(":")[0]
         task, metric = TASKS[scenario]
         text = {i["id"]: i["input"]["text"] for i in instances}
