@@ -25,6 +25,9 @@
 :root[data-look][data-theme="dark"] { --accent: #79ac32; --accent-hover: #8fbe57; --accent-soft: rgb(121 172 50 / 0.14); --accent-glow: rgb(121 172 50 / 0.2); --on-accent: #0d1406; --fx-2: #cc97f4; --fx-3: #5fd99d; --bg: #0c1107; --bg-elevated: #13180d; --surface: #161c10; --surface-2: #1e2418; --surface-3: #272e21; --border: #2d3228; --border-strong: #3f4539; --line: #2d3228; }</style>
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js" data-fx>
 <link rel="modulepreload" href="fx3d.js" data-fx>
+<link rel="canonical" href="https://umer-78.github.io/llm-cost-autopilot/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23578013'/><text x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='system-ui,sans-serif' font-weight='700'>L</text></svg>">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "LLM Cost Autopilot · Umer Hashmi", "url": "https://umer-78.github.io/llm-cost-autopilot/", "applicationCategory": "DeveloperApplication", "operatingSystem": "Any (runs in a web browser)", "isAccessibleForFree": true, "author": {"@type": "Person", "name": "Umer Hashmi", "url": "https://umer-78.github.io/"}, "description": "A router that sends each prompt to the cheapest model likely to get it right, measured on 2,197 held-out HELM questions.", "image": "https://umer-78.github.io/llm-cost-autopilot/og.jpg", "sameAs": "https://github.com/umer-78/llm-cost-autopilot"}</script>
 </head>
 <body>
   <div class="wrap">
@@ -34,7 +37,7 @@
       <h1>LLM Cost Autopilot</h1>
       <p class="lede">Most prompts don't need the most expensive model. This router predicts, for every model, the chance it answers a prompt correctly and picks the cheapest one that is likely enough to. Everything below is measured on 2,197 held-out questions from HELM Lite, with each provider's list prices applied to HELM's real token counts.</p>
       <div class="links"><a class="btn primary" href="#confidence">Set the router&#x27;s confidence</a><a class="btn" href="https://github.com/umer-78/llm-cost-autopilot">Code and method</a></div>
-      <div class="fx-tags" aria-hidden="true"><div><span>python</span><span>llm</span><span>routing</span><span>cost</span><span>scikit-learn</span><span>helm</span><span>python</span><span>llm</span><span>routing</span><span>cost</span><span>scikit-learn</span><span>helm</span></div></div>
+      <div class="fx-tags"><div><span>python</span><span>llm</span><span>routing</span><span>cost</span><span>scikit-learn</span><span>helm</span></div></div>
     </header>
     <main>
       <section class="kpis" id="kpis"></section>
